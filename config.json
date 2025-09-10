@@ -4,22 +4,31 @@
     "tagline": "Combining Machine Learning with Quantum Physics for Ground Breaking Research",
     "gravatarEmail": "anoshin.m04@gmail.com",
     "photo": "avatar_image.png",
-    "bio": "I'm Matvei Anoshin — a WordPress product entrepreneur, Senior Director of Customer Experience at StellarWP, and co-founder of GiveWP. I lead teams, build brands, and design customer-first experiences that scale. I also host WP Product Talk, a podcast focused on helping WordPress product owners grow with confidence. I'm passionate about 3rd wave coffee, piano, disc golf, and faith-centered leadership."
+    "bio": "I'm Matvei Anoshin — a Bachelor of Applied and Math Physics from Moscow Institute of Physics and Technology (MIPT) with 3+ more years of experience in Machine Learning and Quantum Computing."
   },
   "social": {
     "scholar" : "https://scholar.google.com/citations?user=WlFOf5gAAAAJ&hl=en",
     "github": "https://github.com/g42alaxy/",
     "x": "https://x.com/g42alaxy",
+    "email": "mailto://anoshin.m04@gmail.com"
   },
   "links": [
     {
-      "title": "Recent News 1: Proud to announce that I've been chosen to Participate in EEML-2025!",
+      "title": "WP Product Talk Podcast",
       "url": "https://wpproducttalk.com"
     },
     {
-      "title": "Recent News 2",
+      "title": "StellarWP",
       "url": "https://stellarwp.com"
     },
+    {
+      "title": "GiveWP",
+      "url": "https://givewp.com"
+    },
+    {
+      "title": "My Writing",
+      "url": "https://mattcromwell.com"
+    }
   ],
   "blog": {
     "rssFeed": "https://www.mattcromwell.com/feed/",
