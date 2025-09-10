@@ -1,41 +1,29 @@
 {
   "profile": {
     "name": "Matvei Anoshin",
-    "tagline": "Quantun Machine Learning Researcher. Computational Physics Enthusiast",
+    "tagline": "Quantum Machine Learning Researcher",
     "gravatarEmail": "anoshin.m04@gmail.com",
     "photo": "avatar_image.png",
-    "bio": "I'm Matvei Anoshin — a BSc from Moscow Institute of Physics and Technology (MIPT) with 3+ years of experience in Machine Learning and Quantum Computing."
+    "bio": "I'm Matvei Anoshin — a BSc from Moscow Institute of Physics and Technology (MIPT) with 3+ years of experience in Machine Learning and Quantum Computing. I have extensive background in ML & DL, curated with projects work during Summer Schools (EEML-2025, AIRI-2025, SMILES-2024) along with strong physics knowledge (Gold Medalist of All-Russian Student Physicists' Tournament 2025 and a Semifinalist of International Physicists' Tournament 2024), which I dedicate to scientific research useful for industrial applications of emerging technologies"
   },
   "social": {
-    "scholar" : "https://scholar.google.com/citations?user=WlFOf5gAAAAJ&hl=en",
-    "orcid"   : "https://orcid.org/0009-0008-5538-4490",
-    "github": "https://github.com/g42alaxy/",
-    "telegram": "t.me/g42alaxy",
-    "x": "https://x.com/g42alaxy",
-    "email": "mailto://anoshin.m04@gmail.com"
+    "scholar"  :  "https://scholar.google.com/citations?user=WlFOf5gAAAAJ&hl=en",
+    "orcid"    :  "https://orcid.org/0009-0008-5538-4490",
+    "github"   :  "https://github.com/g42alaxy/",
+    "telegram" :  "https://t.me/g42alaxy",
+    "x"        :  "https://x.com/g42alaxy",
+    "email"    :  "mailto://anoshin.m04@gmail.com"
   },
   "links": [
     {
-      "title": "Proud to anounce that I've been chosen as a EEML-2025 Participant! See you in Bosnia 🇧🇦! ",
+      "title": "Proud to anounce that I've been chosen as a participant and poster-presenter at EEML-2025! See you in Bosnia 🇧🇦! ",
       "url": "https://www.eeml.eu/home"
     },
     {
-      "title": "StellarWP",
-      "url": "https://stellarwp.com"
-    },
-    {
-      "title": "GiveWP",
-      "url": "https://givewp.com"
+      "title": "Happy to share that I've won an audience award for the poster on AIRI-2025 Summer School!",
+      "url": "https://airi.net/ru/summer-school-2025/"
     }
   ],
-  "support": {
-    "buttonText": "Buy Me a Coffee ☕️",
-    "url": "https://www.buymeacoffee.com/mattcromwell"
-  },
-  "contact": {
-    "buttonText": "Contact Me ✉️",
-    "url": "https://mattcromwell.com/contact"
-  },
   "theme": "bulky",
   "gravatarHovercard": false
 } 
