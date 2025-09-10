@@ -1,0 +1,180 @@
+/* Bulky Theme: Large, bold, soft, and modern – Sea-Green Edition */
+:root {
+  --accent-color: #1abc9c;              /* sea green */
+  --link-color: #1abc9c;                /* sea green */
+  --link-hover-color: #16a085;          /* darker sea green */
+  --text-color: #1e3d36;                /* deep teal text */
+  --button-bg-color: #48c9b0;           /* lighter green for buttons */
+  --button-text-color: #ffffff;
+  --button-hover-bg-color: #1abc9c;     /* main sea green */
+  --button-hover-text-color: #ffffff;
+  --background-color: #f0f8f7;          /* very light greenish background */
+  --border-color: #145a52;              /* dark teal border */
+  --accent-color-light: #e6f7f4;        /* pale sea green highlight */
+}
+
+body {
+  font-family: 'Noto Sans', 'Segoe UI', Arial, sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.bio-container {
+  background: #fff;
+  border-radius: 2rem;
+  border: 4px solid var(--text-color);
+  padding: 3rem 2rem;
+  max-width: 700px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+#gravatar-image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 6px solid var(--text-color);
+  border-width: 4px 4px 16px 8px;
+  border-radius: 50%;
+  margin-bottom: 1.5rem;
+}
+
+h1,h2 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+}
+h1 {
+  font-size: 2.5rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  color: var(--link-hover-color);
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--accent-color);
+}
+
+.tagline {
+  color: var(--link-hover-color);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.social-icons a {
+  background: var(--background-color);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.25rem;
+  font-size: 1.3rem;
+  border: 2px solid var(--border-color);
+  border-width: 2px 2px 4px 4px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.social-icons a:hover {
+  background: #d6f3ed; /* light hover background */
+  color: var(--link-hover-color);
+  transform: scale(1.1);
+}
+
+.links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.link-button, .support-button, .blog-post {
+  border: 2px solid var(--border-color);
+  border-width: 2px 2px 6px 6px;
+  box-sizing: border-box;
+  transition: background 0.2s, color 0.2s, transform 0.2s, border-width 0.2s;
+}
+
+.link-button {
+  background: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: 4px solid var(--border-color);
+  border-width: 2px 2px 6px 6px;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-button:hover, .link-button:focus {
+  background: var(--button-hover-bg-color);
+  color: var(--button-hover-text-color);
+  transform: scale(1.1);
+}
+
+.bio p {
+  background: var(--accent-color-light);
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 8px rgba(26, 188, 156, 0.08);
+  border: 1.5px solid var(--border-color);
+  border-width: 1.5px 1.5px 4.5px 4.5px;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.blog-post {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+}
+
+.blog-post h3 {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.read-more {
+  color: var(--accent-color);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.read-more:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+.credits a {
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.credits a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .bio-container {
+    padding: 1.5rem 0.5rem;
+  }
+  .profile-image {
+    width: 96px;
+    height: 96px;
+  }
+  .link-button {
+    font-size: 1rem;
+    padding: 1rem 1.2rem;
+  }
+}
