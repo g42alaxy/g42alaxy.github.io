@@ -1,9 +1,9 @@
 {
   "profile": {
     "name": "Matvei Anoshin",
-    "tagline": "Helping WordPress professionals build better businesses",
+    "tagline": "Combining Machine Learning with Quantum Physics for Ground Breaking Research",
     "gravatarEmail": "anoshin.m04@gmail.com",
-    "bio": "I'm Matt Cromwell — a WordPress product entrepreneur, Senior Director of Customer Experience at StellarWP, and co-founder of GiveWP. I lead teams, build brands, and design customer-first experiences that scale. I also host WP Product Talk, a podcast focused on helping WordPress product owners grow with confidence. I'm passionate about 3rd wave coffee, piano, disc golf, and faith-centered leadership."
+    "bio": "I'm Matvei Anoshin — a WordPress product entrepreneur, Senior Director of Customer Experience at StellarWP, and co-founder of GiveWP. I lead teams, build brands, and design customer-first experiences that scale. I also host WP Product Talk, a podcast focused on helping WordPress product owners grow with confidence. I'm passionate about 3rd wave coffee, piano, disc golf, and faith-centered leadership."
   },
   "social": {
     "x": "https://x.com/g42alaxy",
@@ -40,6 +40,6 @@
     "buttonText": "Contact Me ✉️",
     "url": "https://mattcromwell.com/contact"
   },
-  "theme": "dark",
+  "theme": "bulky",
   "gravatarHovercard": false
 } 
