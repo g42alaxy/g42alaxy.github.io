@@ -10,25 +10,17 @@
     "scholar" : "https://scholar.google.com/citations?user=WlFOf5gAAAAJ&hl=en",
     "github": "https://github.com/g42alaxy/",
     "x": "https://x.com/g42alaxy",
-    "email": "mailto:anoshin.m04@gmail.com"
+    "email": "mailto://anoshin.m04@gmail.com"
   },
   "links": [
     {
-      "title": "WP Product Talk Podcast",
+      "title": "Recent News 1: Proud to announce that I've been chosen to Participate in EEML-2025!",
       "url": "https://wpproducttalk.com"
     },
     {
-      "title": "StellarWP",
+      "title": "Recent News 2",
       "url": "https://stellarwp.com"
     },
-    {
-      "title": "GiveWP",
-      "url": "https://givewp.com"
-    },
-    {
-      "title": "My Writing",
-      "url": "https://mattcromwell.com"
-    }
   ],
   "blog": {
     "rssFeed": "https://www.mattcromwell.com/feed/",
