@@ -102,10 +102,22 @@ async function initializeContent() {
       if (url) {
         const a = document.createElement('a');
         a.href = url;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
         a.ariaLabel = `Visit ${platform} profile`;
         a.innerHTML = socialIconMap[platform] || socialIconMap.default;
+    
+        // Handle mailto links separately
+        if (url.startsWith("mailto:")) {
+          // do NOT set target="_blank" for mailto
+          // optional: you could add a click handler if needed
+          a.addEventListener('click', (e) => {
+            // just in case you want extra behavior, currently default mailto works
+          });
+        } else {
+          // external links: open in new tab safely
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+    
         socialIcons.appendChild(a);
       }
     });
