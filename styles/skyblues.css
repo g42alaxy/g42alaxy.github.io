@@ -208,8 +208,10 @@ a {
 }
 
 .news-scroll .link-button {
-  flex: 0 0 240px !important;   /* фиксированная ширина, не растягивается */
+  flex: 0 0 240px !important;
   min-width: 0;
   scroll-snap-align: start;
-  /* высота выравнивается автоматически */
+  overflow: hidden;           /* ← текст не вылазит за границу */
+  word-break: break-word;
+  white-space: normal;        /* ← если где-то стоит nowrap */
 }
