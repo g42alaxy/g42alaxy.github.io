@@ -184,12 +184,13 @@ a {
 /* === News horizontal scroll === */
 .news-scroll {
   display: flex;
-  flex-direction: row !important;  /* override links-grid column на мобиле */
+  flex-direction: row !important;
   flex-wrap: nowrap !important;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 1rem;
-  padding-bottom: 0.75rem;
+  padding: 0.5rem 1rem 0.75rem 1rem;  /* ← добавили горизонтальный padding */
+  margin: 0 -1rem;                     /* ← компенсируем чтобы не съезжало */
   -webkit-overflow-scrolling: touch;
 }
 
