@@ -183,7 +183,7 @@ a {
 
 /* === News horizontal scroll === */
 .link-section {
-  overflow: hidden; /* чтобы скролл не вылезал за карточку */
+  overflow: hidden;
 }
 
 .news-scroll {
@@ -191,13 +191,13 @@ a {
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   justify-content: flex-start !important;
+  align-items: stretch;
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   gap: 1rem;
-  /* выходим за padding bio-container (3rem 2rem) */
-  padding: 0.5rem 2rem 1rem 2rem;
-  margin: 0 -2rem;
+  padding: 0.5rem 2rem 1rem 0.25rem;
+  margin: 0 -2rem 0 -0.25rem;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -215,15 +215,19 @@ a {
 }
 
 .news-scroll .link-button {
-  flex: 0 0 220px !important;
-  width: 220px !important;
-  min-width: 220px !important;
-  max-width: 220px !important;
-  min-height: 120px;
+  flex: 0 0 240px !important;
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  min-height: 140px;
   margin: 0 !important;
   scroll-snap-align: start;
   overflow: visible !important;
   white-space: normal !important;
   word-break: break-word;
   box-sizing: border-box;
+}
+
+.news-scroll .link-button:hover {
+  transform: scale(1.03) !important;
 }
