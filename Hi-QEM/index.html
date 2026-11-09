@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hi-QEM: Hierarchical Models and Benchmark for Learning-based Quantum Error Mitigation at Readout</title>
+<meta name="description" content="Hi-Graph and Hi-CNN: hierarchical deep learning models for device-oriented quantum error mitigation at readout.">
+<link rel="icon" type="image/png" href="icons/websiteicon.png">
+<link rel="apple-touch-icon" href="icons/websiteicon.png">
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+<link rel="stylesheet" href="css/bulma.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<section class="hero">
+  <div class="columns is-centered affiliation-row">
+    <a href="https://www.ens.psl.eu/" target="_blank" rel="noopener"><img class="affiliation" src="icons/logo_ens_psl_petit_rvb_bleu.png" alt="University of Udine"></a>
+    <a href="https://www.uniud.it/" target="_blank" rel="noopener"><img class="affiliation" src="icons/ita_logo.0x1000.jpg" alt="University of Udine"></a>
+    <a href="https://www.unina.it/" target="_blank" rel="noopener"><img class="affiliation" src="icons/logo_02UNINA-1.png" alt="University of Naples Federico II"></a>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">Hi-QEM: Hierarchical Models and Benchmark for Learning-based Quantum Error Mitigation at Readout</h1>
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">
+              <div class="author-portrait"><img src="authors/mat.jpeg" alt="Matvei Anoshin"></div>
+              <a href="https://scholar.google.com/citations?hl=en&user=WlFOf5gAAAAJ">Matvei Anoshin</a><sup>1,2*</sup>
+            </span>
+            <span class="author-block">
+              <div class="author-portrait"><img src="authors/dan.jpeg" alt="Daniele Lizzio Bosco"></div>
+              <a href="https://scholar.google.com/citations?hl=en&user=ZmhvP7kAAAAJ">Daniele Lizzio Bosco</a><sup>2,3,&dagger;</sup>
+            </span>
+            <span class="author-block">
+              <div class="author-portrait"><img src="authors/giu.jpeg" alt="Giuseppe Serra"></div>
+              <a href="https://scholar.google.com/citations?user=xz1J-xQAAAAJ&hl=en">Giuseppe Serra</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>École normale supérieure Paris, France</span><br>
+            <span class="author-block"><sup>2</sup>Università degli Studi di Udine, Italy</span><br>
+            <span class="author-block"><sup>3</sup>Università degli Studi di Napoli Federico II, Italy</span>
+          </div>
+
+          <div class="is-size-7 publication-note">
+            <span class="author-block">* Research conducted during a stay as a visiting student</span>
+            <span class="author-block">&dagger; Correspondence: lizziobosco.daniele@spes.uniud.it</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#roadmap" class="external-link button is-normal is-rounded is-dark is-soon" title="Not yet submitted to arXiv">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                  <span class="soon-tag">soon</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/g42alaxy/Hi-QEM" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">&#129303;</span>
+                  <span>Benchmark</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="teaser">
+  <div class="frame">
+    <img src="assets/img/architecture.svg" alt="Hi-CNN / Hi-Graph hierarchical architecture diagram">
+  </div>
+  <p class="caption">
+    <b>Hi-CNN and Hi-Graph</b> share a plug-and-play hierarchical architecture: hand-crafted circuit/device features,
+    a structural circuit embedding (1D-CNN or graph-transformer), and the noisy readout distribution are encoded in
+    parallel branches, fused, and applied as a residual correction to the noisy input — followed by a SoftPlus +
+    L<sub>1</sub>-normalization to recover a valid probability distribution.
+  </p>
+</section>
+-->
+
+<section class="section" id="abstract">
+  <h2 class="title is-3 has-text-centered">Abstract</h2>
+  <div class="prose">
+    <p>
+      Noise remains the main obstacle to useful computation on current quantum processors. Quantum error
+      mitigation (QEM) methods that post-process measured output distributions typically rely on calibration data
+      or simplified noise models, while learning-based approaches can infer hardware-specific noise directly from
+      data but are usually trained for a single register size and evaluated on the circuit families seen in
+      training.
+    </p>
+    <p>
+      We introduce <strong>Hi-QEM</strong>, a device-conditioned deep learning framework for QEM of full output
+      distributions at readout. Its hierarchical models, <strong>Hi-CNN</strong> and <strong>Hi-Graph</strong>,
+      combine the noisy distribution with hand-crafted circuit and device features and a structural embedding of
+      the transpiled circuit, so that a single model per device mitigates circuits of 2 to 10 qubits. The models
+      are trained on a mixture in which 90% of the circuits are classically simulable Clifford and Matchgate
+      circuits.
+    </p>
+    <p>
+      In noisy simulations of IBM Torino and IBM Miami, they achieve the lowest MSE among learning-based methods
+      in zero-shot evaluation on MQT Bench, QASMBench and VeriQBench, up to <strong>10&times;</strong> below the
+      strongest baseline, and attain the lowest or tied MSE against calibration-based methods, in four of six
+      settings, without calibration data at inference. After lightweight fine-tuning, they match or surpass the
+      best calibration-based method on QAOA, Trotterized Ising, and Graph State circuits. Models trained on Torino
+      also transfer zero-shot to Miami, a device with a different coupling map, staying within about
+      <strong>25%</strong> of natively trained models outside Trotterized circuits. We publicly release the
+      benchmark, including circuits, noisy and ideal distributions, and generation code.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="contributions">
+  <h2 class="title is-3 has-text-centered">Main Contributions</h2>
+
+  <div class="cards" style="max-width:1200px; margin:44px auto 0;">
+    <div class="card">
+      <div class="num">1</div>
+      <h3>Hierarchical models</h3>
+      <p>Hi-CNN and Hi-Graph mitigate readout noise for circuits of 2&ndash;10 qubits with a <strong>single model per device</strong> &mdash; no calibration data, no extra circuit executions at inference.</p>
+    </div>
+    <div class="card">
+      <div class="num">2</div>
+      <h3>Training-data composition</h3>
+      <p>A mixture of classically-simulable Clifford and Matchgate circuits, plus a small share of Random circuits, <strong>generalizes better than any single family</strong> on real, unseen benchmarks.</p>
+    </div>
+    <div class="card">
+      <div class="num">3</div>
+      <h3>Benchmark</h3>
+      <p>Zero-shot and fine-tuned evaluation across real circuit benchmarks and structured tasks, on two IBM processors, against both learning- and calibration-based baselines &mdash; <strong>released publicly</strong> on Hugging Face.</p>
+    </div>
+    <div class="card">
+      <div class="num">4</div>
+      <h3>Cross-device transfer</h3>
+      <p>Models trained on one processor (IBM Torino) <strong>transfer to another</strong> (IBM Miami) &mdash; a different hardware generation, a different coupling map &mdash; zero-shot and after light fine-tuning.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="method">
+  <h2 class="title is-3 has-text-centered">Method</h2>
+
+  <div class="result-block">
+    <figure class="result">
+      <img src="assets/img/model_scheme.png" alt="Hi-CNN / Hi-Graph model scheme: noisy readout, feature, and embedding branches fused into a residual correction with skip-connection, SoftPlus and L1-normalization">
+      <figcaption>
+        Three branches, one correction: the noisy readout <b>p</b>, hand-crafted circuit/device features
+        <b>f</b>, and a structural embedding <b>e</b> of the circuit (conditioned on the target device's
+        connectivity) are each encoded, fused, and projected to a residual correction <b>r</b>. Added back to
+        <b>p</b> via a skip-connection and renormalized, it recovers the mitigated distribution p&#770;.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="prose">
+    <p>
+      Hi-QEM treats readout mitigation as regression: a model takes the noisy output distribution, plus
+      circuit/device features and a structural embedding of the circuit, and predicts the ideal distribution.
+      The only thing that changes between the two models is how that structure gets encoded &mdash; a flat,
+      ordered sequence through a 1D-CNN (&rarr; <strong>Hi-CNN</strong>), or two graphs (operation flow +
+      qubit connectivity) through a graph transformer (&rarr; <strong>Hi-Graph</strong>).
+    </p>
+  </div>
+
+  <div class="prose">
+    <p>
+      Everything is fused into a residual correction, added back to the noisy input, and renormalized into a
+      valid probability distribution. Crucially, each device needs just <strong>one model across the full
+      2&ndash;10 qubit range</strong> &mdash; not nine separate ones &mdash; at essentially no cost in accuracy.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="datasets">
+  <h2 class="title is-3 has-text-centered">Datasets</h2>
+  <div class="prose">
+    <p>
+      Training draws on 54,000 circuits spanning 2&ndash;10 qubits &mdash; Clifford, Matchgate, and a small
+      share of Random &mdash; so that <strong>90%</strong> are classically simulable and cheap to label. Everything
+      below is then tested zero-shot or lightly fine-tuned on circuits the models have never seen: real
+      algorithmic benchmarks and structured downstream tasks.
+    </p>
+
+  <div class="result-block">
+    <figure class="result">
+      <img src="assets/img/eda_pies_radars.png" alt="Gate composition pie charts and SupermarQ feature spider charts for Clifford, Matchgate and Random circuits">
+      <figcaption>
+        <b>(a)</b> The three training families &mdash; Clifford, Matchgate, and Random &mdash; each mix 1- and
+        2-qubit gates differently. <b>(b)</b> Their structural fingerprints (SupermarQ features) start out just
+        as distinct, but transpilation to the target device pulls all three toward a shared, device-native profile.
+      </figcaption>
+    </figure>
+  </div>
+
+  <div class="prose">
+    <p>
+      Every circuit ships with full feature extraction attached: gate statistics, SupermarQ structural features
+      before and after transpilation, QASM2.0 source, the ideal distribution, and 5,000-shot noisy readout data
+      from the target backend.
+    </p>
+  </div>
+
+  </div>
+    <div class="pill-row">
+    <div class="pill-line">
+      <span class="pill train">Training &middot; Clifford</span>
+      <span class="pill train">Training &middot; Matchgate</span>
+      <span class="pill train">Training &middot; Random</span>
+    </div>
+    <div class="pill-line">
+      <span class="pill zshot">Zero-shot &middot; MQT</span>
+      <span class="pill zshot">Zero-shot &middot; QASMBench</span>
+      <span class="pill zshot">Zero-shot &middot; VeriQBench</span>
+    </div>
+    <div class="pill-line">
+      <span class="pill ft">Fine-tune &middot; QAOA</span>
+      <span class="pill ft">Fine-tune &middot; Trotter</span>
+      <span class="pill ft">Fine-tune &middot; Graph State</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <h2 class="title is-3 has-text-centered">Results</h2>
+  <div class="prose">
+    <p>
+      Everything below is on two IBM backends &mdash; <strong>Torino</strong> and <strong>Miami</strong> &mdash;
+      scored by MSE against the ideal distribution and by L<sub>1</sub> relative change (L1&nbsp;RC), where
+      L1&nbsp;RC&nbsp;&lt;&nbsp;1 means mitigation actually helped.
+    </p>
+  </div>
+
+  <!-- Training recipe -->
+  <div class="result-block">
+    <h3 class="rt">Training-data composition</h3>
+    <p class="rsub">Does blending classically-simulable circuits with a small share of Random circuits help generalization?</p>
+    <figure class="result">
+      <img src="assets/img/scaling_recipe_2x2.png" alt="Median MSE of Hi-CNN under four training recipes, evaluated on Clifford and Random circuits, for Torino and Miami">
+      <figcaption>
+        Training on one family alone backfires: a <b>Clifford-only</b> model falls apart on Random circuits, and
+        a <b>Random-only</b> model falls apart on Clifford circuits. The <b>blended recipe</b> ranks best on
+        Random circuits while staying close to the Clifford-only model on Clifford circuits &mdash; the small
+        trade-off is well worth the gain in generalization.
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Joint training -->
+  <div class="result-block">
+    <h3 class="rt">Joint training</h3>
+    <p class="rsub">Hi-CNN and Hi-Graph vs. training-based baselines fitted separately per N<sub>qubits</sub>, on synthetic Random circuits.</p>
+    <figure class="result">
+      <img src="assets/img/scaling_combined.png" alt="Mean MSE and L1 relative change of training-based QEM methods against register size on Torino and Miami">
+      <figcaption>
+        One jointly-trained model matches or beats baselines fitted separately per qubit count &mdash; and is
+        the <em>only</em> approach whose L1 RC stays below 1 across the full 2&ndash;10 qubit range. Tree-based
+        baselines don't scale this way: they actively worsen the distribution at higher qubit counts.
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Zero-shot benchmarks with tabs -->
+  <div class="result-block">
+    <h3 class="rt">Zero-shot generalization to real benchmarks</h3>
+    <div class="tabs-group" data-tabs data-subtitle-target="zshot-subtitle">
+      <p class="rsub" id="zshot-subtitle">vs. training-based baselines &mdash; MQT, QASMBench, and VeriQBench, never seen during training.</p>
+      <div class="tabs">
+        <button class="tab-btn active" data-target="training"
+                data-subtitle="vs. training-based baselines &mdash; MQT, QASMBench, and VeriQBench, never seen during training.">
+          vs. training-based methods
+        </button>
+        <button class="tab-btn" data-target="calibration"
+                data-subtitle="vs. calibration-based methods (M3, QBEEP, Q-Cluster) &mdash; MQT, QASMBench, and VeriQBench, never seen during training.">
+          vs. calibration-based methods
+        </button>
+      </div>
+      <div class="tab-panel active" data-panel="training">
+        <figure class="result">
+          <img src="assets/img/eval_benchmarks_1.png" alt="Zero-shot MSE of training-based QEM methods on MQT, QASMBench and VeriQBench for Torino and Miami">
+          <figcaption>
+            Hi-CNN and Hi-Graph are the strongest learning-based mitigators on <em>every</em> benchmark and
+            backend, often by a wide margin &mdash; while the plain MLP baseline collapses outright on the
+            harder datasets.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="tab-panel" data-panel="calibration">
+        <figure class="result">
+          <img src="assets/img/eval_benchmarks_2.png" alt="Zero-shot MSE of calibration-based QEM methods vs Hi-Graph and Hi-CNN on MQT, QASMBench and VeriQBench for Torino and Miami">
+          <figcaption>
+            Without a single piece of calibration data, the hierarchical models match or beat per-circuit
+            calibration methods on most benchmarks &mdash; and crush Q-Cluster by well over an order of
+            magnitude across the board.
+          </figcaption>
+        </figure>
+        <div class="callout">
+          <span class="dot"></span>
+          <span>No calibration data needed at inference: constant cost in shots and qubits, vs. growing cost
+          for M3 / QBEEP / Q-Cluster.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Downstream tasks -->
+  <div class="result-block">
+    <h3 class="rt">Structured downstream tasks</h3>
+    <p class="rsub">QAOA (MaxCut), Trotterized TFIM time-evolution, and Graph State preparation &mdash; zero-shot and after light fine-tuning.</p>
+    <figure class="result">
+      <img src="assets/img/downstream_tasks_ultimate.png" alt="MSE of calibration methods, zero-shot training-based methods, and fine-tuned models on QAOA, Trotter, and Graph State">
+      <figcaption>
+        Zero-shot, the hierarchical models already lead every learning-based baseline on QAOA and Graph State.
+        <b>Trotter</b> is the hard case &mdash; its deep, repeating structure never appears in training &mdash;
+        but a light amount of fine-tuning closes that gap and pushes the models to match or beat the best
+        calibration method across <em>all three</em> tasks.
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Transfer learning -->
+  <div class="result-block">
+    <h3 class="rt">Cross-device transfer: IBM Torino &rarr; IBM Miami</h3>
+    <div class="tabs-group" data-tabs data-subtitle-target="transfer-subtitle">
+      <p class="rsub" id="transfer-subtitle">Benchmark suites &mdash; MQT, QASMBench, VeriQBench.</p>
+      <div class="tabs">
+        <button class="tab-btn active" data-target="tf-benchmarks"
+                data-subtitle="Benchmark suites &mdash; MQT, QASMBench, VeriQBench.">
+          Benchmark suites
+        </button>
+        <button class="tab-btn" data-target="tf-downstream"
+                data-subtitle="Downstream tasks &mdash; QAOA, Trotter, Graph State.">
+          Downstream tasks
+        </button>
+      </div>
+      <div class="tab-panel active" data-panel="tf-benchmarks">
+        <figure class="result">
+          <img src="assets/img/transfer_table_benchmarks.png" alt="Transfer-learning results table on MQT, QASMBench and VeriQBench for Hi-CNN and Hi-Graph">
+          <figcaption>
+            Transferred zero-shot from Torino, both models hold up well on Miami &mdash; within about 25% of
+            native training, and sometimes beating it outright on VeriQBench. Fine-tuning on target-device data
+            helps further on MQT, but is a mixed bag on QASMBench and VeriQBench, where the zero-shot transfer
+            was already strong.
+          </figcaption>
+        </figure>
+      </div>
+      <div class="tab-panel" data-panel="tf-downstream">
+        <figure class="result">
+          <img src="assets/img/transfer_table_downstream.png" alt="Transfer-learning results table on QAOA, Trotter and Graph State for Hi-CNN and Hi-Graph">
+          <figcaption>
+            On QAOA, fine-tuning turns the transfer into the best result on the board, matching the top
+            calibration method. On Trotter, fine-tuning helps but doesn't fully close the gap to native
+            training. On Graph State the picture splits by model: Hi-CNN's zero-shot transfer is already its
+            best result, while Hi-Graph benefits most from fine-tuning.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="section" id="roadmap">
+  <h2 class="title is-3 has-text-centered">What's Next</h2>
+  <div class="prose">
+    <p>
+      This page is a static showcase of the current results. Next, we plan to build an interactive mitigation
+      explorer: make the benchmark suite explorable directly in the browser, pick a circuit, drag a slider between
+      the noisy and mitigated distributions, and watch the bitstring histogram converge toward the ideal one.
+    </p>
+  </div>
+  <div class="mock-slider">
+    <div class="row"><span>Noisy readout</span><span>Mitigated (Hi-CNN)</span></div>
+    <div class="bar-track"><div class="handle"></div></div>
+    <div class="labels"><span class="l1">p (as measured)</span><span class="l2">p&#770; &asymp; p_ideal</span></div>
+    <div class="caption2">Mock preview &mdash; drag the handle. Real per-circuit distributions will ship with the public dataset release.</div>
+  </div>
+  <div class="prose" style="margin-top:34px;">
+    <p>
+      Alongside the interactive explorer, we intend to release the full data-generation pipeline and pre-trained
+      Hi-CNN / Hi-Graph checkpoints on <strong>GitHub</strong> and <strong>Hugging Face</strong>, so that the
+      benchmark suite and models are reusable beyond this paper.
+    </p>
+  </div>
+</section>
+-->
+
+<section class="section" id="BibTeX">
+  <h2 class="title is-3 has-text-centered">BibTeX</h2>
+  <div class="container is-max-desktop content">
+    <!--<h2 class="title">BibTeX</h2>-->
+    <pre><code>@article{anoshin2026hiqem,
+  title   = {Hi-QEM: Hierarchical Models and Benchmark for Learning-based
+             Quantum Error Mitigation at Readout},
+  author  = {Anoshin, Matvei and Lizzio Bosco, Daniele and Serra, Giuseppe},
+  journal = {arXiv preprint},
+  year    = {2026},
+  note    = {Preprint; arXiv identifier to be assigned upon submission}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            <strong>Acknowledgments.</strong> The authors are grateful to Jacopo Cossio for proofreading the text
+            of this manuscript. We would also like to thank Hanna Shcharbakova for making this collaboration
+            possible.
+          </p>
+          <p>
+            This webpage is built with <a href="https://claude.ai/new">Claude</a> using the <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+            website template, following its adaptation in
+            <a href="https://david-svitov.github.io/BBSplat_project_page/" target="_blank" rel="noopener">BBSplat</a> and
+            <a href="https://hypernerf.github.io/" target="_blank" rel="noopener">HyperNeRF</a>. We sincerely thank
+            <a href="https://keunhong.com/" target="_blank" rel="noopener">Keunhong Park</a> and
+            <a href="https://david-svitov.github.io/" target="_blank" rel="noopener">David Svitov</a>
+            for developing and open-sourcing these templates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
