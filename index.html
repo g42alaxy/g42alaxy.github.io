@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Personal bio site for Matvei Anoshin - Quantum Machine Learning Researcher and Computational Physics Enthusiast" />
   <title id="page-title">Loading...</title>
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="favicon.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <style>
     /* Critical layout CSS */
     * {
@@ -43,6 +46,10 @@
       margin-top: 1rem;
     }
     
+    .featured-paper[hidden] {
+      display: none !important;
+    }
+
     .links-grid {
       display: flex;
       flex-wrap: wrap;
@@ -100,6 +107,9 @@
         <!-- Social icons will be dynamically inserted here -->
       </nav>
     </header>
+
+    <!-- Featured paper banner: filled from config.json "featuredPaper" (set "enabled": false to hide) -->
+    <a id="featured-paper" class="featured-paper" hidden></a>
 
     <section class="bio" aria-label="Biography">
       <h2>Bio</h2>

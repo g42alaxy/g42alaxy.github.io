@@ -4,4 +4,8 @@
 
 ## Structure: 
 
-`config.json` - the main file of the website's content 
+`config.json` - name, tagline, photo, social links and theme
+
+`info.md` - the Bio (`## Bio`, plain text) and the Recent News list (`## Recent News`, one line per item: `- [Text](https://link)` or `- Text`, newest on top)
+
+`config.json` → `featuredPaper` - the "Check out my new paper!" link under the social icons: set `"enabled": false` to hide it, or change `url` for a new paper

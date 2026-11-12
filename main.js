@@ -78,7 +78,7 @@ async function initializeContent() {
     // Set profile information
     document.getElementById('profile-name').textContent = config.profile.name;
     document.getElementById('profile-tagline').textContent = config.profile.tagline;
-    document.getElementById('bio-text').textContent = config.profile.bio;
+    // Bio and news come from info.md (see loadInfo below)
 
     // Generate social icons
     const socialIcons = document.querySelector('.social-icons');
@@ -122,28 +122,40 @@ async function initializeContent() {
       }
     });
 
-    // Generate link buttons, but skip the Contact Me link if it matches config.contact.url
-    const linksGrid = document.querySelector('.links-grid');
-    config.links.forEach(link => {
-      // Skip if this link is the contact link
-      if (config.contact && link.url === config.contact.url) return;
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.className = 'link-button';
-      a.textContent = link.title;
-      a.ariaLabel = `Visit ${link.title}`;
-      linksGrid.appendChild(a);
-    });
+    // Featured paper banner (between socials and bio)
+    const featured = document.getElementById('featured-paper');
+    const paper = config.featuredPaper;
+    if (featured && paper && paper.enabled && paper.url) {
+      featured.href = paper.url;
+      featured.innerHTML = '';
+      const label = document.createElement('strong');
+      label.className = 'featured-paper-label';
+      label.textContent = paper.label || 'Check out my new paper!';
+      featured.appendChild(label);
+      if (paper.title) {
+        const title = document.createElement('span');
+        title.className = 'featured-paper-title';
+        title.textContent = paper.title;
+        featured.appendChild(title);
+      }
+      featured.hidden = false;
+    }
 
-    // Set support button
+    loadInfo(document.getElementById('bio-text'), document.querySelector('.links-grid'));
+
+    // Set support button (footer is currently commented out in index.html)
     const supportBtn = document.getElementById('support-button');
-    supportBtn.href = config.support.url;
-    supportBtn.textContent = config.support.buttonText;
-    supportBtn.ariaLabel = config.support.buttonText;
+    if (supportBtn && config.support) {
+      supportBtn.href = config.support.url;
+      supportBtn.textContent = config.support.buttonText;
+      supportBtn.ariaLabel = config.support.buttonText;
+    }
 
     // Set contact button (footer) using config.contact only
     const contactBtn = document.getElementById('contact-button');
-    if (config.contact && config.contact.url && config.contact.buttonText) {
+    if (!contactBtn) {
+      // footer not present
+    } else if (config.contact && config.contact.url && config.contact.buttonText) {
       contactBtn.href = config.contact.url;
       contactBtn.textContent = config.contact.buttonText;
       contactBtn.ariaLabel = config.contact.buttonText;
@@ -178,6 +190,87 @@ async function initializeContent() {
   } catch (error) {
     console.error('Error loading configuration:', error);
   }
+}
+
+// Load the Bio and Recent News from info.md.
+// The file is split into sections by "## Heading" lines:
+//   ## Bio          -> plain text; a blank line starts a new paragraph
+//   ## Recent News  -> one item per line: "- [Text](https://link)" or "- Text"
+// [Text](https://link) links also work inside the bio.
+// Everything outside these sections and inside <!-- comments --> is ignored.
+async function loadInfo(bioEl, newsEl) {
+  try {
+    const response = await fetch('info.md', { cache: 'no-cache' });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const text = (await response.text()).replace(/<!--[\s\S]*?-->/g, '');
+
+    // Split into { heading: lines[] }
+    const sections = {};
+    let current = null;
+    text.split('\n').forEach(line => {
+      const heading = line.match(/^##\s+(.*\S)\s*$/);
+      if (heading) {
+        current = heading[1].toLowerCase();
+        sections[current] = [];
+      } else if (current) {
+        sections[current].push(line.replace(/\s+$/, ''));
+      }
+    });
+    const find = word => Object.keys(sections).find(k => k.includes(word));
+
+    if (bioEl && find('bio')) renderBio(bioEl, sections[find('bio')]);
+    if (newsEl && find('news')) renderNews(newsEl, sections[find('news')]);
+  } catch (error) {
+    console.error('Error loading info.md:', error);
+  }
+}
+
+// Append text to an element, turning [text](url) into links
+function appendWithLinks(parent, text) {
+  const linkRe = /\[([^\]]+)\]\((\S+?)\)/g;
+  let last = 0;
+  let match;
+  while ((match = linkRe.exec(text)) !== null) {
+    parent.appendChild(document.createTextNode(text.slice(last, match.index)));
+    const a = document.createElement('a');
+    a.href = match[2];
+    a.textContent = match[1];
+    parent.appendChild(a);
+    last = linkRe.lastIndex;
+  }
+  parent.appendChild(document.createTextNode(text.slice(last)));
+}
+
+function renderBio(bioEl, lines) {
+  // Group lines into paragraphs separated by blank lines
+  const paragraphs = lines.join('\n').split(/\n\s*\n/)
+    .map(p => p.split('\n').map(l => l.trim()).join(' ').trim())
+    .filter(Boolean);
+  bioEl.textContent = '';
+  paragraphs.forEach((paragraph, i) => {
+    if (i > 0) {
+      bioEl.appendChild(document.createElement('br'));
+      bioEl.appendChild(document.createElement('br'));
+    }
+    appendWithLinks(bioEl, paragraph);
+  });
+}
+
+function renderNews(newsEl, lines) {
+  lines.forEach(line => {
+    const item = line.match(/^[-*]\s+(.*\S)\s*$/);
+    if (!item) return;
+    const link = item[1].match(/^\[(.+)\]\((\S+)\)$/);
+
+    const el = document.createElement(link ? 'a' : 'div');
+    el.className = link ? 'link-button' : 'link-button news-plain';
+    el.textContent = link ? link[1] : item[1];
+    if (link) {
+      el.href = link[2];
+      el.ariaLabel = `Visit ${link[1]}`;
+    }
+    newsEl.appendChild(el);
+  });
 }
 
 // Initialize the page

@@ -178,3 +178,14 @@ a {
 a:hover {
     color: var(--link-hover-color);
 } 
+
+.featured-paper {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.featured-paper-label,
+.featured-paper-title {
+    display: block;
+}
